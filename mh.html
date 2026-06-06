@@ -1,213 +1,535 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MindEase - Mental Health App</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MindEase | Mental Health App</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-    background:#f5f9ff;
-    color:#333;
+background:linear-gradient(135deg,#5B6DFF,#8E54E9);
+color:white;
+transition:.4s;
+overflow-x:hidden;
+}
+
+body.dark{
+background:#0d1117;
+}
+
+body.dark .glass{
+background:rgba(255,255,255,.05);
+}
+
+body.dark .feature{
+background:rgba(255,255,255,.05);
+}
+
+body.dark .mood-card{
+background:rgba(255,255,255,.05);
 }
 
 header{
-    background:#6c63ff;
-    color:white;
-    padding:20px;
-    text-align:center;
+position:fixed;
+width:100%;
+top:0;
+left:0;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+backdrop-filter:blur(18px);
+background:rgba(255,255,255,.1);
+z-index:1000;
 }
 
-nav{
-    margin-top:10px;
+.logo{
+font-size:28px;
+font-weight:700;
 }
 
 nav a{
-    color:white;
-    text-decoration:none;
-    margin:0 15px;
-    font-weight:bold;
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-weight:500;
+transition:.3s;
+}
+
+nav a:hover{
+opacity:.7;
+}
+
+.toggle{
+padding:10px 18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-weight:bold;
+background:white;
 }
 
 .hero{
-    padding:60px 20px;
-    text-align:center;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:120px 8%;
 }
 
-.hero h1{
-    font-size:40px;
-    margin-bottom:15px;
+.glass{
+width:100%;
+max-width:1200px;
+padding:60px;
+border-radius:30px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(25px);
+box-shadow:0 10px 40px rgba(0,0,0,.2);
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+justify-content:space-between;
+animation:fadeUp 1s ease;
 }
 
-.hero p{
-    max-width:700px;
-    margin:auto;
-    line-height:1.6;
+.left{
+flex:1;
+min-width:300px;
+}
+
+.left h1{
+font-size:55px;
+line-height:1.2;
+margin-bottom:20px;
+}
+
+.left p{
+line-height:1.8;
+margin-bottom:30px;
 }
 
 .btn{
-    margin-top:20px;
-    padding:12px 25px;
-    background:#6c63ff;
-    color:white;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
+padding:14px 30px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+font-size:16px;
+font-weight:600;
+background:white;
+color:#5B6DFF;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-4px);
+}
+
+.right{
+flex:1;
+display:flex;
+justify-content:center;
+min-width:300px;
+}
+
+.circle{
+width:320px;
+height:320px;
+border-radius:50%;
+background:rgba(255,255,255,.2);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:140px;
+animation:float 3s infinite ease-in-out;
 }
 
 section{
-    padding:50px 20px;
+padding:80px 8%;
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    margin-top:20px;
+.title{
+text-align:center;
+font-size:40px;
+margin-bottom:50px;
 }
 
-.card{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,.1);
-    text-align:center;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
 }
 
-.card h3{
-    margin-bottom:10px;
+.feature{
+padding:30px;
+border-radius:25px;
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(18px);
+transition:.4s;
 }
 
-.mood button{
-    font-size:28px;
-    border:none;
-    background:none;
-    cursor:pointer;
-    margin:10px;
+.feature:hover{
+transform:translateY(-10px);
+}
+
+.feature h2{
+margin-bottom:15px;
+}
+
+.mood-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+gap:20px;
+}
+
+.mood-card{
+padding:30px;
+text-align:center;
+border-radius:20px;
+cursor:pointer;
+background:rgba(255,255,255,.12);
+transition:.4s;
+font-size:18px;
+}
+
+.mood-card:hover{
+transform:scale(1.05);
 }
 
 #moodResult{
-    margin-top:15px;
-    font-weight:bold;
-    color:#6c63ff;
+margin-top:35px;
+text-align:center;
+font-size:25px;
+font-weight:bold;
+}
+
+.quote{
+text-align:center;
+font-size:26px;
+font-weight:500;
+line-height:1.8;
+max-width:900px;
+margin:auto;
 }
 
 footer{
-    background:#222;
-    color:white;
-    text-align:center;
-    padding:20px;
+padding:30px;
+text-align:center;
+background:rgba(0,0,0,.15);
+margin-top:50px;
 }
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(50px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-18px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+@media(max-width:900px){
+
+.glass{
+text-align:center;
+}
+
+.left h1{
+font-size:38px;
+}
+
+.right{
+margin-top:40px;
+}
+
+.circle{
+width:220px;
+height:220px;
+font-size:90px;
+}
+
+header{
+flex-direction:column;
+gap:15px;
+}
+
+nav a{
+margin:8px;
+display:inline-block;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
-    <h2>🧠 MindEase</h2>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#features">Features</a>
-        <a href="#mood">Mood</a>
-        <a href="#contact">Contact</a>
-    </nav>
+
+<div class="logo">
+🧠 MindEase
+</div>
+
+<nav>
+
+<a href="#home">Home</a>
+<a href="#features">Features</a>
+<a href="#mood">Mood</a>
+<a href="#quote">Wellness</a>
+
+</nav>
+
+<button class="toggle" onclick="toggleDark()">
+🌙
+</button>
+
 </header>
 
-<section class="hero">
-    <h1>Take Care of Your Mental Health 💙</h1>
-    <p>
-        Track your mood, practice mindfulness, and build healthy habits
-        with MindEase.
-    </p>
+<section class="hero" id="home">
 
-    <button class="btn" onclick="scrollToMood()">
-        Check Your Mood
-    </button>
+<div class="glass">
+
+<div class="left">
+
+<h1>
+Your Mental Health Matters
+</h1>
+
+<p>
+
+Track your emotions, practice mindfulness,
+build healthy habits and improve your daily
+well-being with an elegant digital companion.
+
+</p>
+
+<button class="btn" onclick="goMood()">
+
+Get Started
+
+</button>
+
+</div>
+
+<div class="right">
+
+<div class="circle">
+
+❤️
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
 <section id="features">
-    <h2 align="center">Our Features</h2>
 
-    <div class="cards">
+<h1 class="title">
+Amazing Features
+</h1>
 
-        <div class="card">
-            <h3>😊 Mood Tracker</h3>
-            <p>Record your emotions and monitor your daily mental wellness.</p>
-        </div>
+<div class="grid">
 
-        <div class="card">
-            <h3>🧘 Meditation</h3>
-            <p>Relax with guided breathing and meditation exercises.</p>
-        </div>
+<div class="feature">
 
-        <div class="card">
-            <h3>📖 Daily Journal</h3>
-            <p>Write your thoughts and reflect on your personal growth.</p>
-        </div>
+<h2>😊 Mood Tracker</h2>
 
-        <div class="card">
-            <h3>💡 Wellness Tips</h3>
-            <p>Receive simple tips to improve your mental well-being.</p>
-        </div>
+<p>
 
-    </div>
+Log your daily emotions and understand
+your emotional journey.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h2>🧘 Meditation</h2>
+
+<p>
+
+Relax with guided breathing and mindful
+sessions.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h2>📖 Journal</h2>
+
+<p>
+
+Write your thoughts privately every day.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h2>📊 Progress</h2>
+
+<p>
+
+Monitor your personal wellness growth.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h2>🌿 Self Care</h2>
+
+<p>
+
+Receive healthy lifestyle recommendations.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h2>💡 Daily Motivation</h2>
+
+<p>
+
+Start every morning with positive energy.
+
+</p>
+
+</div>
+
+</div>
+
 </section>
 
-<section id="mood" class="mood">
+<section id="mood">
 
-    <h2 align="center">How Are You Feeling Today?</h2>
+<h1 class="title">
 
-    <div style="text-align:center;margin-top:20px;">
+How Are You Feeling Today?
 
-        <button onclick="setMood('Happy 😊')">😊</button>
+</h1>
 
-        <button onclick="setMood('Okay 🙂')">🙂</button>
+<div class="mood-container">
 
-        <button onclick="setMood('Sad 😔')">😔</button>
+<div class="mood-card" onclick="mood('😊 Happy')">
 
-        <button onclick="setMood('Stressed 😣')">😣</button>
+😊 Happy
 
-    </div>
+</div>
 
-    <p id="moodResult" align="center"></p>
+<div class="mood-card" onclick="mood('🙂 Calm')">
+
+🙂 Calm
+
+</div>
+
+<div class="mood-card" onclick="mood('😔 Sad')">
+
+😔 Sad
+
+</div>
+
+<div class="mood-card" onclick="mood('😣 Stressed')">
+
+😣 Stressed
+
+</div>
+
+</div>
+
+<div id="moodResult"></div>
 
 </section>
 
-<section id="contact">
+<section id="quote">
 
-    <h2 align="center">Stay Positive 🌸</h2>
+<h1 class="title">
 
-    <p align="center" style="margin-top:15px;">
-        "Your mental health is just as important as your physical health."
-    </p>
+Daily Wellness
+
+</h1>
+
+<p class="quote">
+
+"The greatest investment you can make is in your own mental well-being.
+Small positive habits create lasting happiness."
+
+</p>
 
 </section>
 
-<footer id="contact">
-    <p>© 2026 MindEase | Built with HTML, CSS & JavaScript</p>
+<footer>
+
+© 2026 MindEase |
+Designed with HTML, CSS & JavaScript
+
 </footer>
 
 <script>
 
-function setMood(mood){
+function mood(value){
 
-document.getElementById("moodResult").innerHTML =
-"Today's Mood: " + mood + "<br>Have a wonderful day! 💜";
+document.getElementById("moodResult").innerHTML=
+
+"Today's Mood : <br><br>"+value+" ❤️";
 
 }
 
-function scrollToMood(){
+function toggleDark(){
+
+document.body.classList.toggle("dark");
+
+}
+
+function goMood(){
 
 document.getElementById("mood").scrollIntoView({
+
 behavior:"smooth"
+
 });
 
 }
