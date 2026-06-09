@@ -16,5 +16,5 @@ A responsive Mental Health and Wellness web application built using HTML, CSS, a
 - CSS3
 - JavaScript
 
-## Author
+## BY
 KARTHIKA KK
